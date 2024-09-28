@@ -147,7 +147,7 @@
         </form>
 
         <div class="result">
-            SLA acumulado: <?php echo sprintf("%02d:%02d", floor($_SESSION['total_sla_minutes'] / 60), $_SESSION['total_sla_minutes'] % 60); ?>
+            tempo de SLA acumulado: <?php echo sprintf("%02d:%02d", floor($_SESSION['total_sla_minutes'] / 60), $_SESSION['total_sla_minutes'] % 60); ?>
         </div>
 
         <script>
