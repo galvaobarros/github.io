@@ -103,7 +103,7 @@
         <h2>Calculadora de SLA</h2>
         
         <p class="description">
-            Esta calculadora serve para acumular o tempo entre cada nota de chamado. Posteriormente, você pode calcular o total na aba "Calcular Hora Total".
+            Esta calculadora serve para acumular o tempo entre cada nota de chamado. Posteriormente, você pode calcular o total na aba "Calcular Total de SLA".
         </p>
 
         <?php
@@ -147,7 +147,7 @@
         </form>
 
         <div class="result">
-            tempo de SLA acumulado: <?php echo sprintf("%02d:%02d", floor($_SESSION['total_sla_minutes'] / 60), $_SESSION['total_sla_minutes'] % 60); ?>
+            SLA acumulado em horas/minutos: <?php echo sprintf("%02d:%02d", floor($_SESSION['total_sla_minutes'] / 60), $_SESSION['total_sla_minutes'] % 60); ?>
         </div>
 
         <script>

@@ -117,7 +117,7 @@
             $end_time = $_POST["end_time"];
 
             // Verifica se os horários estão no formato correto
-            if (preg_match('/^[0-9]{2}:[0-9]{2}$/', $start_time) && preg_match('/^[0-9]{2}:[0-9]{2}$/', $end_time)) {
+            if (!empty($start_time) && !empty($end_time)) {
                 // Converte os horários para minutos
                 $start_minutes = timeToMinutes($start_time);
                 $end_minutes = timeToMinutes($end_time);
@@ -133,40 +133,28 @@
                 // Converte a diferença de volta para o formato HH:MM
                 $difference = minutesToTime($diff_minutes);
             } else {
-                $error = "Por favor, insira horários válidos no formato HH:MM.";
+                $error = "Por favor, insira horários válidos.";
             }
         }
         ?>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <label for="start_time">Hora Inicial (HH:MM):</label>
-            <input type="text" name="start_time" id="start_time" placeholder="08:00" maxlength="5" pattern="[0-9]{2}:[0-9]{2}" oninput="autoInsertColon(this)" required>
-            <label for="end_time">Hora Final (HH:MM):</label>
-            <input type="text" name="end_time" id="end_time" placeholder="12:00" maxlength="5" pattern="[0-9]{2}:[0-9]{2}" oninput="autoInsertColon(this)" required>
+            <label for="start_time">Hora Inicial:</label>
+            <input type="time" name="start_time" id="start_time" value="00:00" required>
+            <label for="end_time">Hora Final:</label>
+            <input type="time" name="end_time" id="end_time" value="00:00" required>
             <button type="submit" name="calculate_diff">Calcular Diferença</button>
         </form>
 
         <?php if ($difference): ?>
             <div class="result">
-                Diferença: <?php echo $difference; ?>
+                Diferença de horas/minutos: <?php echo $difference; ?>
             </div>
         <?php elseif ($error): ?>
             <div class="error">
                 <?php echo $error; ?>
             </div>
         <?php endif; ?>
-
-        <script>
-            function autoInsertColon(input) {
-                if (input.value.length === 2 && !input.value.includes(':')) {
-                    input.value += ':';
-                }
-                input.value = input.value.replace(/[^\d:]/g, '');
-                if (input.value.length > 5) {
-                    input.value = input.value.substring(0, 5);
-                }
-            }
-        </script>
     </div>
 </body>
 </html>
